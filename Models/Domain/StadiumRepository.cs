@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WorldSoccerStadiums.Models.Domain
 {
@@ -17,7 +15,7 @@ namespace WorldSoccerStadiums.Models.Domain
 
         public IEnumerable<Stadium> Get()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<Stadium>>(File.ReadAllText(filePath));
+            return  JsonConvert.DeserializeObject<IEnumerable<Stadium>>(File.ReadAllText(filePath));
         }
   
  
