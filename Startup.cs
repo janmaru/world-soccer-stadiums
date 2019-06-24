@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 using WorldSoccerStadiums.Models.Infrastructure;
 
 namespace WorldSoccerStadiums
@@ -41,6 +43,12 @@ namespace WorldSoccerStadiums
             // Native DI Abstraction -- end
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +67,23 @@ namespace WorldSoccerStadiums
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                          Path.Combine(Directory.GetCurrentDirectory(), @"ClientApp", "build", "static", "js"))
+            });
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+              Path.Combine(Directory.GetCurrentDirectory(), @"ClientApp", "build", "static", "css"))
+            });
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+              Path.Combine(Directory.GetCurrentDirectory(), @"ClientApp", "build"))
+            });
+
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
@@ -68,7 +93,6 @@ namespace WorldSoccerStadiums
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
@@ -77,7 +101,7 @@ namespace WorldSoccerStadiums
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
-            });
+            }); 
         }
     }
 }
