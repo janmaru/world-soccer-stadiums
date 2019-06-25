@@ -178,22 +178,7 @@ export class Map extends Component {
                             "text-halo-width": 2
                         }
                     });
-
-                    //map.loadImage("./football-field.png", function (error, image) { // load the image file 
-                    //    if (error) throw error;
-                    //    map.addImage("custom-marker", image); // name the image file we are loading 
-                    //    map.addLayer({
-                    //        'id': "unclustered-point",// name of the layer 
-                    //        'type': "symbol",
-                    //        'source': "stadiums",
-                    //        'filter': ["!", ["has", "point_count"]],
-                    //        'layout': {
-                    //            "icon-image": "custom-marker", // the name of image file we used above
-                    //            "icon-allow-overlap": false,
-                    //            "icon-size": 0.05 //this is a multiplier applied to the standard size. So if you want it half the size put ".5"
-                    //        }
-                    //    });
-                    //});
+ 
                 });
             }));
     }

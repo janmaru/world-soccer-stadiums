@@ -5,7 +5,7 @@ using WorldSoccerStadiums.Models.Domain;
 
 namespace WorldSoccerStadiums.Controllers
 {
-    [Route("api/v1/stadium")]
+
     public class StadiumController : ControllerBase
     {
         private readonly IStadiumRepository repoStadium;
@@ -15,14 +15,22 @@ namespace WorldSoccerStadiums.Controllers
         }
 
         // GET: api/Stadium
+        [Route("api/v1/stadium")]
         [HttpGet]
         public IEnumerable<Stadium> Get()
         {
             return repoStadium.Get();
         }
 
-     
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet]
+        [Route("api/v1/stadium-paging")]
+        public IActionResult Get([FromQuery] int pageSize, [FromQuery] int page, [FromQuery] string sorted, [FromQuery]  string filtered)
+        {
+            return Ok(new { children = repoStadium.Get().ToList().Take(pageSize).Skip(page* pageSize) , count = repoStadium.Get().Count() });
+        }
+
+
+        [HttpGet("api/v1/stadium/{id}", Name = "Get")]
         public Stadium Get(int id)
         {
             return repoStadium.Get(id);

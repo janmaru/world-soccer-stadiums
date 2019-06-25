@@ -8,7 +8,7 @@ import "./Table.css";
 
 export class Table extends Component {
   static displayName = Table.name;
-Table
+
   constructor (props) {
     super(props); 
     this.state = { stadiums: [], loading: true };
