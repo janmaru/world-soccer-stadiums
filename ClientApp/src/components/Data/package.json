@@ -1,0 +1,13 @@
+{
+  "main": "Data.js",
+  "name": "st-nav-data",
+  "description": "data component",
+  "version": "0.0.1",
+  "keywords": [
+    "list",
+    "menu"
+  ],
+  "webkit": {
+    "page-cache": false
+  }
+}

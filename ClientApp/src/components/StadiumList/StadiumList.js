@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 
-import Pagination from "./Pagination";
+import Pagination from "../../helpers/Pagination";
 
 import "react-table/react-table.css";
-import "./Table.css";
+import "../../assets/css/Table.css";
 
-export class Table extends Component {
-  static displayName = Table.name;
+export class StadiumList extends Component {
+    static displayName = StadiumList.name;
 
   constructor (props) {
     super(props); 
@@ -60,7 +60,7 @@ export class Table extends Component {
   render() { 
     let contents = this.state.loading
         ? <p><em>Loading...</em></p>
-        : Table.render(this.state.stadiums); 
+        : StadiumList.render(this.state.stadiums); 
 
     return (
               <div>

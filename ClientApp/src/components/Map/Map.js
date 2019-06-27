@@ -22,13 +22,14 @@ export class Map extends Component {
     }
 
     componentDidMount() {
-        const { lng, lat, zoom } = this.state;
+        const { lng, lat, zoom, minZoom } = this.state;
 
         const map = new MapboxGl.Map({
             container: this.container,
             style: 'mapbox://styles/janmaru/cjwy1o6ft3wlj1cn30b02hgg4',
             center: [lng, lat],
-            zoom
+            zoom,
+            minZoom
         });
 
         map.on('move', () => {
@@ -156,8 +157,7 @@ export class Map extends Component {
                             "text-size": 12
                         }
                     });
-
-
+ 
                     map.addLayer({
                         'id': "unclustered-point",// name of the layer 
                         'type': "symbol",
