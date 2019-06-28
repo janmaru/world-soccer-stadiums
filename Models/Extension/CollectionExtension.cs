@@ -17,7 +17,7 @@ namespace WorldSoccerStadiums.Models.Extension
         public static T Random<T>(IEnumerable<T> input)
         {
             return input.ElementAt(r.Next(input.Count()));
-        } 
+        }
     }
 
     public static class EnumerableExtensions
