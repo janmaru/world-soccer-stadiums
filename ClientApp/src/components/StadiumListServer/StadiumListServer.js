@@ -5,20 +5,35 @@ import "react-table/react-table.css";
  
 
 export class StadiumListServer extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            data: this.props.data,
-            loading: false,
+            data: [],
+            loading: true,
             pages: 0
         };
+        this.fetchData = this.fetchData.bind(this);
+    }
+
+ 
+
+    fetchData(state, instance) { 
+        fetch('api/v1/stadium-paging?pagesize=' + state.pageSize + '&page=' + state.page + "&sorted=" + JSON.stringify(state.sorted) + "&filtered=" + JSON.stringify(state.filtered))
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ stadiums: data.rows, loading: false, pages: data.pages });
+            }); 
     }
 
     render() {
-        const { data } = this.state;
+        const { stadiums, pages, loading } = this.state;
         return (
             <ReactTable
-                data={data}
+                manual // Forces table not to paginate or sort automatically, so we can handle it server-side
+                data={stadiums}
+                //showPagination={true}
+                pages={pages} // Display the total number of pages
+                defaultPageSize={10} 
                 columns={[
                     {
                         Header: "Id",
@@ -45,9 +60,10 @@ export class StadiumListServer extends React.Component {
                         accessor: "capacity",
                         minWidth: 100
                     }
-                ]}
-                defaultPageSize={10}
+                ]} 
+                loading={loading} // Display the loading overlay when we need it
                 className="-striped -highlight"
+                onFetchData={this.fetchData} // Request new data when things change 
             /> 
         );
     }
