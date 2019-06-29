@@ -7,26 +7,26 @@ using WorldSoccerStadiums.Models.Service;
 
 namespace WorldSoccerStadiums.Controllers
 {
-
-    public class MapController : ControllerBase
+    [Route("api/v1/[controller]")]
+    public class MarkerController : ControllerBase
     {
         private readonly IFeatureService featureService;
-        public MapController(IFeatureService featureService)
+        public MarkerController(IFeatureService featureService)
         {
             this.featureService = featureService;
         }
 
 
         [HttpGet]
-        [Route("api/v1/geo")]
-        public Geo Markers()
+        [Route("[action]")] 
+        public Geo List()
         {
             return featureService.Get();
         }
 
         [HttpGet]
-        [Route("api/v1/geo/centroid")]
-        public IEnumerable<double> CentroidOfMarkers()
+        [Route("[action]")]
+        public IEnumerable<double> Centroid()
         {
             var g = featureService.Get().Features.Select(x => x.Geometry.Coordinates);
             return g.Centroid();
@@ -34,8 +34,8 @@ namespace WorldSoccerStadiums.Controllers
 
 
         [HttpGet]
-        [Route("api/v1/geo/random")]
-        public IEnumerable<double> RandomMarker()
+        [Route("[action]")]
+        public IEnumerable<double> Random()
         {
             return featureService.Get().Features.Select(x => x.Geometry.Coordinates).Random();
         }

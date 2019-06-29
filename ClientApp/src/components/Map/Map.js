@@ -8,7 +8,7 @@ export class Map extends Component {
     constructor(props) {
         super(props);
 
-        MapboxGl.accessToken = "pk.eyJ1IjoiamFubWFydSIsImEiOiJjaW5hMm05bmcwMDBtdzdseXhwM2E0ZWIzIn0.SCC8rQzLuE6PYDoEncrqHQ";// process.env.REACT_APP_MAPBOX_ACCESSTOKEN;
+        MapboxGl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
         this.state = {
             stadiums: [],
@@ -100,7 +100,7 @@ export class Map extends Component {
             map.resize();
         })
 
-        fetch('api/v1/geo')
+        fetch('api/v1/marker/list')
             .then(response => response.json())
             .then(data => this.setState({ stadiums: data }, () => {
                 map.on('load', function () {

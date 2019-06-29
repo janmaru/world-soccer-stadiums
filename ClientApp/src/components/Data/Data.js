@@ -7,7 +7,7 @@ export class Data extends Component {
         super(props);
         this.state = { stadiums: [], loading: true };
 
-        fetch('api/v1/stadium')
+        fetch('api/v1/stadium/list')
             .then(response => response.json())
             .then(data => {
                 this.setState({ stadiums: data, loading: false });

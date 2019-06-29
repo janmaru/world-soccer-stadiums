@@ -15,7 +15,7 @@ export class StadiumList extends Component {
     }
 
     componentDidMount() {
-        fetch('api/v1/stadium')
+        fetch('api/v1/stadium/list')
             .then(response => response.json())
             .then(data => {
                 this.setState({ stadiums: data, loading: false });

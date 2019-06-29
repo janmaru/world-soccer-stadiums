@@ -18,7 +18,7 @@ export class StadiumListServer extends React.Component {
  
 
     fetchData(state, instance) { 
-        fetch('api/v1/stadium-paging?pagesize=' + state.pageSize + '&page=' + state.page + "&sorted=" + JSON.stringify(state.sorted) + "&filtered=" + JSON.stringify(state.filtered))
+        fetch('api/v1/stadium/pagedlist?pagesize=' + state.pageSize + '&page=' + state.page + "&sorted=" + JSON.stringify(state.sorted) + "&filtered=" + JSON.stringify(state.filtered))
             .then(response => response.json())
             .then(data => {
                 this.setState({ stadiums: data.rows, loading: false, pages: data.pages });
