@@ -8,7 +8,7 @@ export class Map extends Component {
     constructor(props) {
         super(props);
 
-        MapboxGl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+        MapboxGl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN_DEV;
 
         this.state = {
             stadiums: [],
